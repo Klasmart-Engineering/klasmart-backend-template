@@ -4,6 +4,6 @@ data "azuread_client_config" "main" {}
 #   backend = "local"
 
 #   config = {
-#     path = "/Users/jameswilson/service_api/terraform.tfstate"
+#     path = "/Users/me/service_api/terraform.tfstate"
 #   }
 # }
