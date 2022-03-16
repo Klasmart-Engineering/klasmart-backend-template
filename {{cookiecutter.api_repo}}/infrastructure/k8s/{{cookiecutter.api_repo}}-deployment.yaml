@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{cookiecutter.repo_name}}
+spec:
+  selector:
+    matchLabels:
+      app: {{cookiecutter.repo_name}}
+  template:
+    metadata:
+      labels:
+        app: {{cookiecutter.repo_name}}
+    spec:
+      containers:
+      - name: {{cookiecutter.repo_name}}
+        env:
+          - name: MY_ENV_VAR
+            value: https://myenvvar.com/
+        image: {{cookiecutter.repo_name}}-tilt
+        resources: {}
+        ports:
+        - containerPort: {{cookiecutter.port}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{cookiecutter.repo_name}}
+spec:
+  selector:
+    app: {{cookiecutter.repo_name}}
+  ports:
+  - port: {{cookiecutter.port}}
+    targetPort: 8081
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{cookiecutter.repo_name}}-ingress
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{cookiecutter.repo_name}}-ingress
+            port:
+              number: {{cookiecutter.port}}

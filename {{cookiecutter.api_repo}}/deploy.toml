@@ -1,0 +1,12 @@
+# deploy config
+
+type = "spa|api"
+
+# privileges
+[schedule_api]
+access = "read*"
+access = "schedule/create.read"
+
+[content_api]
+access = "write*"
+access = "content/{tenantid}.admin.write"

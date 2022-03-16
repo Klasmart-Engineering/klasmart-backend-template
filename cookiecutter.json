@@ -1,0 +1,8 @@
+{
+    "repo_name": "api",
+    "port": "8080",
+    "azure_tenant_id": "my_azuread_tenant_id",
+    "services": {
+        "values": ["service_api"]
+    }
+}
